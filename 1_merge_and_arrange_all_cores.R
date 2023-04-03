@@ -1,6 +1,6 @@
 # TAXALOSS Project - Import and merge all OBITools 3 processed data
 # Script from Jeremy Courtin
-# Script last update - 16.03.2023
+# Script last update - 03.04.2023
 
 # Layout of the script: 
 # 0 - GENERAL OPTION - SETTING UP SCRIPT
@@ -26,7 +26,6 @@ library("scales")
 library("rioja")
 library("tidypaleo")
 theme_set(theme_paleo(15))
-
 
 ############################################################################
 # 1 - Set variables
