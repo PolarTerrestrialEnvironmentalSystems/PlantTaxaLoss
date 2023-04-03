@@ -54,15 +54,15 @@ For script: 8_Simulate_GBIF_coverage.R you need:
 - a dataframe GBIF_DB_coverage.csv available from Stoof-Leichsenring et al. in prep.
 
 ## References:
-Alsos et al. 2022: "Postglacial species arrival and diversity build-up of northern ecosystems took millennia", https://doi.org/10.1126/sciadv.abo7434
-Dallmeyer et al. 2022: "The deglacial forest conundrum", https://doi.org/10.1038/s41467-022-33646-6
-Herzschuh et al. 2022a: "LegacyClimate 1.0: A dataset of pollen-based climate reconstructions from 2594 Northern Hemisphere sites covering the late Quaternary", https://doi.org/10.5194/essd-2022-38
-Herzschuh et al. 2022b: "LegacyPollen 1.0: a taxonomically harmonized global late Quaternary pollen dataset of 2831 records with standardized chronologies", https://doi.org/10.5194/essd-14-3213-2022
-Kanz et al. 2005: "The EMBL nucleotide sequence database", https://doi.org/10.1093/nar/gki098
-Soininen et al. 2015: "Highly overlapping winter diet in two sympatric lemming species revealed by DNA metabarcoding", https://doi.org/10.1371/journal.pone.0115335 
-Sønstebø et al. 2010: "Using next-generation sequencing for molecular reconstruction of past Arctic vegetation and climate", https://doi.org/10.1111/j.1755-0998.2010.02855.x
-Stuart et al. 2015: "Late Quaternary megafaunal extinctions on the continents: a short review", https://doi.org/10.1002/gj.2633 
-Willerslev et al. 2014: "Fifty thousand years of Arctic vegetation and megafaunal diet",  https://doi.org/10.1038/nature12921
+- Alsos et al. 2022: "Postglacial species arrival and diversity build-up of northern ecosystems took millennia", https://doi.org/10.1126/sciadv.abo7434
+- Dallmeyer et al. 2022: "The deglacial forest conundrum", https://doi.org/10.1038/s41467-022-33646-6
+- Herzschuh et al. 2022a: "LegacyClimate 1.0: A dataset of pollen-based climate reconstructions from 2594 Northern Hemisphere sites covering the late Quaternary", https://doi.org/10.5194/essd-2022-38
+- Herzschuh et al. 2022b: "LegacyPollen 1.0: a taxonomically harmonized global late Quaternary pollen dataset of 2831 records with standardized chronologies", https://doi.org/10.5194/essd-14-3213-2022
+- Kanz et al. 2005: "The EMBL nucleotide sequence database", https://doi.org/10.1093/nar/gki098
+- Soininen et al. 2015: "Highly overlapping winter diet in two sympatric lemming species revealed by DNA metabarcoding", https://doi.org/10.1371/journal.pone.0115335 
+- Sønstebø et al. 2010: "Using next-generation sequencing for molecular reconstruction of past Arctic vegetation and climate", https://doi.org/10.1111/j.1755-0998.2010.02855.x
+- Stuart et al. 2015: "Late Quaternary megafaunal extinctions on the continents: a short review", https://doi.org/10.1002/gj.2633 
+- Willerslev et al. 2014: "Fifty thousand years of Arctic vegetation and megafaunal diet",  https://doi.org/10.1038/nature12921
 
 
 
