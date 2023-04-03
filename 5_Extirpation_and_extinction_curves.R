@@ -220,7 +220,7 @@ dat1 %>%
 ################################################################################
 # 4 - MEGAFAUNA
 ################################################################################
-megafauna <- read_delim("Megafauna_data_/Persotable.csv", delim = ",", col_names = T) %>% subset(!is.na(Area)) 
+megafauna <- read_delim("Megafauna_data/megafauna.csv", delim = ",", col_names = T) %>% subset(!is.na(Area)) 
 
 megafauna %>% dplyr::select(`Scientific name`, Area, `Approximate extinction time`) %>%
   setNames(c("name", "area", "age")) %>% arrange(desc(age)) %>% arrange(desc(name)) %>%

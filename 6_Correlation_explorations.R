@@ -119,7 +119,7 @@ p_extinction_2000 <- read_delim("Figure2_data_save_cand_extinction.csv", delim =
 p_ext_2000 <- cbind(p_loss_2000, select(p_extirpation_2000, p_extir), select(p_extinction_2000, p_extin)) %>% as_tibble()
 
 # Megafauna extinction
-megafauna <- read_delim("Megafauna_data_/Persotable.csv", delim = ",", col_names = T) %>% subset(!is.na(Area)) %>% mutate(timeslice_disappear_1000 = ceiling(`Approximate extinction time`/1000)*1000)
+megafauna <- read_delim("Megafauna_data/megafauna.csv", delim = ",", col_names = T) %>% subset(!is.na(Area)) %>% mutate(timeslice_disappear_1000 = ceiling(`Approximate extinction time`/1000)*1000)
 megafauna_2000 <- megafauna %>% select(timeslice_disappear_1000) %>% group_by(timeslice_disappear_1000) %>% summarise(mega_fauna = sum(timeslice_disappear_1000>0)) %>% setNames(c("age", "megafauna"))
 
 # Check 2000 timeslices
