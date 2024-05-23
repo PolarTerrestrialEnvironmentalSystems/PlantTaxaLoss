@@ -12,10 +12,11 @@ The repository contains 8 files:
 - 6_Correlation_explorations.R
 - 7_Assessment_candidates_absent-modern-databases.R
 - 8_Simulate_GBIF_coverage.R
+- 9_XXX_Ying.R
 
 ## Details
 To run the code you need to have the following data (future repository link)
-Each R script should be run in the numerical order as they use outputs from previous scripts.
+Each R script should be run in numerical order as they use outputs from previous scripts.
 
 Please, make folders in your environment: "output", "plant_types", "Megafauna_data", "Temperature_estimates", "check_against_databases", "Simulate_sampling_GBIF".
 
@@ -47,11 +48,14 @@ For the pollen-based reconstructed climate changes, both MAT and weighted averag
 
 For script: 7_Assessment_candidates_absent-modern-databases.R you need:
 - the outputs from previous scripts
-- 3 fasta files with trnlg/h databases built with OBITools 3: EMBL143 (Kanz et al., 2005); arctborbryo (Soininen et al., 2015; Sønstebø et al., 2010; Willerslev et al., 2014); PhyloNorway (Alsos et al., 2022). See details in Stoof-Leichsenring et al. in prep.
+- 3 fasta files with trnlg/h databases built with OBITools 3: EMBL143 (Kanz et al., 2005); arctborbryo (Soininen et al., 2015; Sønstebø et al., 2010; Willerslev et al., 2014); PhyloNorway (Alsos et al., 2022).
 
 For script: 8_Simulate_GBIF_coverage.R you need:
 - the outputs from previous scripts
-- a dataframe GBIF_DB_coverage.csv available from Stoof-Leichsenring et al. in prep.
+- a dataframe GBIF_DB_coverage.csv available as described in the script to prepare the SibAla_2023 database.
+
+For script: 9_XXX_Ying 
+- 
 
 ## References:
 - Alsos et al. 2022: "Postglacial species arrival and diversity build-up of northern ecosystems took millennia", https://doi.org/10.1126/sciadv.abo7434
