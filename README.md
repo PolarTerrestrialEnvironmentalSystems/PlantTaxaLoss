@@ -12,7 +12,7 @@ The repository contains 8 files:
 - 6_Correlation_explorations.R
 - 7_Assessment_candidates_absent-modern-databases.R
 - 8_Simulate_GBIF_coverage.R
-- 9_XXX_Ying.R
+- 9_genetic_loss_vs_taxa_loss_extinction_vs_extirpation.R
 
 ## Details
 To run the code you need to have the following data (future repository link)
@@ -54,8 +54,11 @@ For script: 8_Simulate_GBIF_coverage.R you need:
 - the outputs from previous scripts
 - a dataframe GBIF_DB_coverage.csv available as described in the script to prepare the SibAla_2023 database.
 
-For script: 9_XXX_Ying 
-- 
+For script: 9_genetic_loss_vs_taxa_loss_extinction_vs_extirpation.R you need:
+- The species list of 7 ASVs (Supplementary table 4)
+- the outputs from previous scripts: (resampled_data_final_1000iterations.rda), the species and corresponding ASVs in Sibala_2023 database (2023_03_14_Table_before_fasta_file_final.csv), and the ASVs and taxa corresponding file (ASVs_taxa_after_louvain_community.csv)
+- A dataframe provided with the manuscript: species_loss_artifical_timeframe.csv
+
 
 ## References:
 - Alsos et al. 2022: "Postglacial species arrival and diversity build-up of northern ecosystems took millennia", https://doi.org/10.1126/sciadv.abo7434
