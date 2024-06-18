@@ -1,6 +1,7 @@
 # PlantTaxaLoss
 
-Code repository for project entitled 'Potential plant extinctions with the loss of the Pleistocene mammoth-steppe' 
+Code repository for study entitled 'Potential plant extinctions with the loss of the Pleistocene mammoth-steppe' (reference publication).
+The needed dataset to run the scripts are described in XXX (reference publication) and outputs of https://github.com/PolarTerrestrialEnvironmentalSystems/sedaDNA-g-h-metabarcoding-SibAla_2023.  
 
 ## General content
 The repository contains 8 files:
