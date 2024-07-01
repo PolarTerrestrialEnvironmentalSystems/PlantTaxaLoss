@@ -55,7 +55,6 @@ data %>% summarise(covered = sum(coverage == 1), uncovered = sum(coverage == 0))
   geom_point() +
   ylim(0, 100) +
   theme_light()
-# 2988 covered and 1520 uncovered
 
 # gbif coverage by the database
 ggplot(data) +
@@ -68,7 +67,7 @@ ggplot(data) +
   facet_wrap(vars(as.factor(coverage))) +
   theme_light()
 
-# all taxa (13 = recent and 0 = old)
+# all taxa
 ggplot(all) +
   geom_histogram(mapping = aes(x = value), position = "stack") +
   facet_wrap(vars(as.factor(name))) +
