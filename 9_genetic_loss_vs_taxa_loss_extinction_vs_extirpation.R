@@ -1,4 +1,5 @@
 # TAXALOSS Project - script to supplementary information 
+# Script by Ying Liu
 # Script last update - 15.04.2023
 
 # Layout of the script: 
