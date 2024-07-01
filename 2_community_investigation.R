@@ -47,10 +47,10 @@ df <- df_raw %>% mutate(short_label = paste(id, identity, scientific_name, sep =
 
 # Check
 df
-df %>% subset(identity == 1) # 367 ASVs assigned at 100%
-df %>% subset(reads_count > 99) # 5421 ASVs with minimum 100 reads
-df %>% subset(reads_count > 99) %>% subset(identity == 1) # 332 ASVs assigned at 100% and with minimum 100 reads
-df %>% subset(reads_count > 99) %>% subset(identity == 1) %>% select(family, genus, species, scientific_name) %>% distinct()#
+df %>% subset(identity == 1)
+df %>% subset(reads_count > 99) 
+df %>% subset(reads_count > 99) %>% subset(identity == 1) 
+df %>% subset(reads_count > 99) %>% subset(identity == 1) %>% select(family, genus, species, scientific_name) %>% distinct()
 
 # make a subset with 100% identity ASVS
 df_NULL <- df %>% subset(identity == 1)
@@ -63,8 +63,6 @@ candidates_fam <- data.frame(table(df_candidates$family)) %>% arrange(desc(Freq)
 ############################################################################
 # 1 - Set parameters and save general information
 ############################################################################
-
-
 names(df)
 # create metadata taxa
 metadata_taxa <- df %>% select(uniq_id, short_label, taxaid, NUC_SEQ, identity, family, genus, species, scientific_name, nsamples, ncores, reads_count)
@@ -172,7 +170,7 @@ cl <- cluster_louvain(net_pos) # alternative used in the manuscript
 # check number of communities
 #length(ceb)
 #length(clp)
-length(cl) # 275 communities detected in manuscript
+length(cl)
 
 #check membership
 #membership(ceb)
@@ -323,10 +321,9 @@ merge_assignments_90percent2 <- merge_assignments1 %>% subset(minid <1 & maxid =
   mutate(reads_count_final = ifelse(identity == 1, reads_count_new+tosum, tosum)) %>% arrange(keep) %>% filter(keep == "keep") %>% select(-keep, -new, -tosum) 
 
 merge_assignments2 <- rbind(merge_assignments_100percent1, merge_assignments_90percent1, merge_assignments_90percent2) 
-# /!\ by merging the same families, it creates artifacts
+# /!\ Just as a side note: by merging the same families, it creates artifacts
 # As within one community, candidate ASVs can be part of the same family of different 100% assigned taxa
-# I do not think it matter too much but just as a side note
-# + already discussed with Ulrike and she agreed as they are all impacted in the same way and it do not affect extinction detection
+# As checking and discussing with co-authors, it does not matter too much as they are all impacted in the same way and it does not affect extinction detection
 
 merge_assignments_clean1 <- merge_assignments2 %>% select(-reads_count_new, -minid, -maxid) %>% distinct() %>% 
   group_by(group, identity, scientific_name) %>% mutate(tot_reads = sum(reads_count_final), nsamples = n_distinct(sample_id)) %>% ungroup() %>% 
