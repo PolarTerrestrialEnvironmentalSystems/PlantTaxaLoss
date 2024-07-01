@@ -68,8 +68,7 @@ core8 <- "Co1412"
 ######################
 # Bolshoe Toko
 ######################
-#tl_btoko_raw <- read_delim(paste("cores/", seq1, "_", core1, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
-tl_btoko_raw <- read_delim(paste("cores/", seq1, "_", core1, "_file02.2_identitylevel_90_merged_replicates_new.csv", sep = ""), delim = ";", col_names = T)
+tl_btoko_raw <- read_delim(paste("cores/", seq1, "_", core1, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
 tl_btoko_raw %>% select(best_identity, NUC_SEQ_arc) %>% filter(best_identity == 1) %>% distinct()
 tl_btoko_raw %>% select(best_identity, NUC_SEQ_arc) %>% filter(best_identity < 1) %>% distinct()
 
@@ -198,8 +197,7 @@ ggsave(paste0("cores/", seq1, "_", core1, "_stratplot_100precent_species_new.png
 ######################
 # Ilerney 16KP
 ######################
-#tl_ilerney16kp_raw <- read_delim(paste("cores/", seq2, "_", core2, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
-tl_ilerney16kp_raw <- read_delim(paste("cores/", seq2, "_", core2, "_file02.2_identitylevel_90_merged_replicates_new.csv", sep = ""), delim = ";", col_names = T)
+tl_ilerney16kp_raw <- read_delim(paste("cores/", seq2, "_", core2, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
 ilerney16kp_asv <- tl_ilerney16kp_raw %>% select(NUC_SEQ_arc, best_identity, best_family, best_genus, best_species, scientific_name)
 tl_ilerney16kp <- tl_ilerney16kp_raw %>% mutate(taxaid = paste(NUC_SEQ_arc, best_identity, best_family, best_genus, best_species, scientific_name, sep = "_")) %>% select(-NUC_SEQ_arc, -best_identity, -best_family, -best_genus, -best_species, -scientific_name)
 ilerney16kp_metadata <- read_excel("metadata/cores/ALRK-5_Ilirney_16KP_agefile.xlsx", col_names = T)
@@ -325,8 +323,7 @@ ggsave(paste0("cores/", seq2, "_", core2, "_stratplot_100precent_species_new.png
 ######################
 # Bilyakh
 ######################
-#tl_bilyakh_raw <- read_delim(paste("cores/", seq3, "_", core3, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
-tl_bilyakh_raw <- read_delim(paste("cores/", seq3, "_", core3, "_file02.2_identitylevel_90_merged_replicates_new.csv", sep = ""), delim = ";", col_names = T)
+tl_bilyakh_raw <- read_delim(paste("cores/", seq3, "_", core3, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
 bilyakh_asv <- tl_bilyakh_raw %>% select(NUC_SEQ_arc, best_identity, best_family, best_genus, best_species, scientific_name)
 tl_bilyakh <- tl_bilyakh_raw %>% mutate(taxaid = paste(NUC_SEQ_arc, best_identity, best_family, best_genus, best_species, scientific_name, sep = "_")) %>% select(-NUC_SEQ_arc, -best_identity, -best_family, -best_genus, -best_species, -scientific_name)
 bilyakh_metadata <- read_excel("metadata/cores/ALRK-8_Bilyakh_agefile.xlsx", col_names = T)
@@ -452,8 +449,7 @@ ggsave(paste0("cores/", seq3, "_", core3, "_stratplot_100precent_species_new.png
 ######################
 # Levinson Lessing
 ######################
-#tl_lele_raw <- read_delim(paste("cores/", seq4, "_", core4, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
-tl_lele_raw <- read_delim(paste("cores/", seq4, "_", core4, "_file02.2_identitylevel_90_merged_replicates_new.csv", sep = ""), delim = ";", col_names = T)
+tl_lele_raw <- read_delim(paste("cores/", seq4, "_", core4, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
 lele_asv <- tl_lele_raw %>% select(NUC_SEQ_arc, best_identity, best_family, best_genus, best_species, scientific_name)
 tl_lele <- tl_lele_raw %>% mutate(taxaid = paste(NUC_SEQ_arc, best_identity, best_family, best_genus, best_species, scientific_name, sep = "_")) %>% select(-NUC_SEQ_arc, -best_identity, -best_family, -best_genus, -best_species, -scientific_name)
 lele_metadata <- read_excel("metadata/cores/ALRK-11_LeLe_agefile.xlsx", col_names = T)
@@ -579,8 +575,7 @@ ggsave(paste0("cores/", seq4, "_", core4, "_stratplot_100precent_species_new.png
 ######################
 # Ilerney EN
 ######################
-#tl_ilerneyEN_raw <- read_delim(paste("cores/", seq5, "_", core5, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
-tl_ilerneyEN_raw <- read_delim(paste("cores/", seq5, "_", core5, "_file02.2_identitylevel_90_merged_replicates_new.csv", sep = ""), delim = ";", col_names = T)
+tl_ilerneyEN_raw <- read_delim(paste("cores/", seq5, "_", core5, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
 ilerneyEN_asv <- tl_ilerneyEN_raw %>% select(NUC_SEQ_arc, best_identity, best_family, best_genus, best_species, scientific_name)
 tl_ilerneyEN <- tl_ilerneyEN_raw %>% mutate(taxaid = paste(NUC_SEQ_arc, best_identity, best_family, best_genus, best_species, scientific_name, sep = "_")) %>% select(-NUC_SEQ_arc, -best_identity, -best_family, -best_genus, -best_species, -scientific_name)
 ilerneyEN_metadata <- read_excel("metadata/cores/ALRK-10_Ilirney_agefile.xlsx", col_names = T)
@@ -706,8 +701,7 @@ ggsave(paste0("cores/", seq5, "_", core5, "_stratplot_100precent_species_new.png
 ######################
 # E5
 ######################
-#tl_E5_raw <- read_delim(paste("cores/", seq6, "_", core6, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
-tl_E5_raw <- read_delim(paste("cores/", seq6, "_", core6, "_file02.2_identitylevel_90_merged_replicates_new.csv", sep = ""), delim = ";", col_names = T)
+tl_E5_raw <- read_delim(paste("cores/", seq6, "_", core6, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
 E5_asv <- tl_E5_raw %>% select(NUC_SEQ_arc, best_identity, best_family, best_genus, best_species, scientific_name)
 tl_E5 <- tl_E5_raw %>% mutate(taxaid = paste(NUC_SEQ_arc, best_identity, best_family, best_genus, best_species, scientific_name, sep = "_")) %>% select(-NUC_SEQ_arc, -best_identity, -best_family, -best_genus, -best_species, -scientific_name)
 E5_metadata <- read_excel("metadata/cores/ALRK-13_E5_agefile.xlsx", col_names = T)
@@ -833,8 +827,7 @@ ggsave(paste0("cores/", seq6, "_", core6, "_stratplot_100precent_species_new.png
 ######################
 # Rauchuagytgyn
 ######################
-#tl_rauchuagytgyn_raw <- read_delim(paste("cores/", seq7, "_", core7, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
-tl_rauchuagytgyn_raw <- read_delim(paste("cores/", seq7, "_", core7, "_file02.2_identitylevel_90_merged_replicates_new.csv", sep = ""), delim = ";", col_names = T)
+tl_rauchuagytgyn_raw <- read_delim(paste("cores/", seq7, "_", core7, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
 rauchuagytgyn_asv <- tl_rauchuagytgyn_raw %>% select(NUC_SEQ_arc, best_identity, best_family, best_genus, best_species, scientific_name)
 tl_rauchuagytgyn <- tl_rauchuagytgyn_raw %>% mutate(taxaid = paste(NUC_SEQ_arc, best_identity, best_family, best_genus, best_species, scientific_name, sep = "_")) %>% select(-NUC_SEQ_arc, -best_identity, -best_family, -best_genus, -best_species, -scientific_name)
 rauchuagytgyn_metadata <- read_excel("metadata/cores/APMG-30_Rauch_agefile.xlsx", col_names = T)
@@ -960,8 +953,7 @@ ggsave(paste0("cores/", seq7, "_", core7, "_stratplot_100precent_species_new.png
 ######################
 # Emanda
 ######################
-#tl_emanda_raw <- read_delim(paste("cores/", seq8, "_", core8, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
-tl_emanda_raw <- read_delim(paste("cores/", seq8, "_", core8, "_file02.2_identitylevel_90_merged_replicates_new.csv", sep = ""), delim = ";", col_names = T)
+tl_emanda_raw <- read_delim(paste("cores/", seq8, "_", core8, "_file02.2_identitylevel_90_merged_replicates.csv", sep = ""), delim = ";", col_names = T)
 emanda_asv <- tl_emanda_raw %>% select(NUC_SEQ_arc, best_identity, best_family, best_genus, best_species, scientific_name)
 tl_emanda <- tl_emanda_raw %>% mutate(taxaid = paste(NUC_SEQ_arc, best_identity, best_family, best_genus, best_species, scientific_name, sep = "_")) %>% select(-NUC_SEQ_arc, -best_identity, -best_family, -best_genus, -best_species, -scientific_name)
 emanda_metadata <- read_excel("metadata/cores/APMG-42_Emanda_agefile.xlsx", col_names = T)
