@@ -18,7 +18,7 @@
 rm(list = ls()) # Remove all the objects we created so far.
 
 # Set up options for the rest of the script
-options(stringsAsFactors=FALSE) # states that everything is reads as character 
+options(stringsAsFactors=FALSE)
 
 # Load all needed packages
 library(tidyverse)
