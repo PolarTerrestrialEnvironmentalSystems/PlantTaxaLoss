@@ -10,18 +10,20 @@
 # 4 - Measure Richness (just as indicator, not really reported in the manuscript)
 # 5.1 - Beta diversity - PODANI
 # 5.2 - Beta diversity - beta_div other beta diveristy estimate
-# 6.1 - Figure 1 - Plant types proportions - number of taxa
+# 6.1 - Plant types proportions - number of taxa
 # 6.2 - Plant types proportions - read counts (not plotted but alternative plot)
 # 7 - Family proportions
-# 8.1 - Figure 1 - Proportion of plant types and phylogenetic tree
-# 8.2 - Figure 1 - proportion of plant types
-# 8.3 - Figure 1 - Plot tree
-# 9 - Figure 3 Hypotheses testing
+# 8.1 - Proportion of plant types and phylogenetic tree
+# 8.2 - Proportion of plant types
+# 8.3 - Plot tree
+# 9 - Hypotheses testing
 # 9.1 - cophenetic distances
 # 9.2 - SCBD
 # 9.3 - Community size - Specialist
 # 9.4 - Metrics - plants type - measure at each iteration
 # 9.5 - Metrics - families - measure at each iteration
+
+# vocabulary used: candidate ASVs / taxa = non-dbASVs / taxa
 
 ###############################################################################
 # 0 - GENERAL OPTION - SETTING UP SCRIPT
@@ -322,7 +324,7 @@ median(countall$count) # median = 90
 sd(countall$count) # sd = 10.24554
 
 ################################################################################
-# 6.1 - Figure 1 - Plant types proportions - number of taxa
+# 6.1 - Plant types proportions - number of taxa
 ################################################################################
 # Candidates taxa count
 plant_type_abund_rawc_cand <- lapply(abund_table, function(x) pivot_longer(x, cols = `13`:`0`, names_to = "timeslice", values_to = "reads", values_drop_na = TRUE) %>% 
@@ -517,7 +519,7 @@ fam_p %>% dplyr::select(age, percentage_n, percentage_reads, family, type) %>%
   labs(x = "Relative proportion of reads (%)", y = "Age (cal. yrs BP")
 
 ################################################################################
-# 8.1 - Figure 1 - Proportion of plant types and phylogenetic tree
+# 8.1 - Proportion of plant types and phylogenetic tree
 ################################################################################
 # Set metrics for phylogenetic tree
 metrics <- norm_raw
@@ -535,7 +537,7 @@ plot_x %>% group_by(key) %>% dplyr::mutate(n_d = sum(group > 0)) %>% arrange(des
 plot_x %>% select(uniq_label, key) %>% distinct()
 
 ################################################################################
-# 8.2 - Figure 1 - proportion of plant types
+# 8.2 - Proportion of plant types
 ################################################################################
 plot_x %>% mutate(plot = paste(type, level, sep = "_")) %>% 
   group_by(plot) %>% mutate(n = n_distinct(key)) %>% dplyr::select(plot, n) %>% distinct() %>%
@@ -562,16 +564,6 @@ plot_x %>% mutate(plot = paste(type, level, sep = "_")) %>%
   group_by(type) %>% mutate(sum = sum(n)) %>% ungroup() %>% mutate(rel_abund = n/sum*100) %>% arrange(plot) %>%
   mutate(tot_sum = sum(n)) %>%
   group_by(level) %>% mutate(rel_abund_level = sum(n)/tot_sum*100)
-
-# plot             n type  level     sum rel_abund tot_sum rel_abund_level
-# <chr>        <int> <chr> <chr>   <int>     <dbl>   <int>           <dbl>
-#   1 1_family        32 1     family    216      14.8     353            17.8
-# 2 1_genus         81 1     genus     216      37.5     353            39.1
-# 3 1_species      103 1     species   216      47.7     353            43.1
-# 4 cand_family     31 cand  family    137      22.6     353            17.8
-# 5 cand_genus      57 cand  genus     137      41.6     353            39.1
-# 6 cand_species    49 cand  species   137      35.8     353            43.1
-
 
 # Phylogenetic tree
 taxalist <- left_join(taxalist, dplyr::select(taxa_info, key, family, genus, species), by = "key")
@@ -615,12 +607,12 @@ fam_label <- tree_tib %>% dplyr::select(parent, family) %>% distinct() %>%
   group_by(family) %>% summarise(parent = min(parent)) %>% arrange(parent) %>% subset(!is.na(family))
 
 ################################################################################
-# 8.3 - Figure 1 - Plot tree
+# 8.3 - Plot tree
 ################################################################################
 # ggtree(tree$scenario.3, branch.length='none', layout='circular') + 
 #   geom_tiplab
 
-# Use this tree in addition to the second one to modify on illustrator and create the final plot.
+# Use this tree in addition to the second one to modify in illustrator and create the final plot.
 ggtree(tree1, aes(color=group), branch.length='none', layout='circular') +
   scale_color_manual(values=c("red3", "black", "blue", "black")) +
   geom_tiplab() +
@@ -651,7 +643,7 @@ ggtree(tree1, aes(color=group), branch.length='none', layout='circular') +
   )
 
 ################################################################################
-# 9 - Figure 3 Hypotheses testing
+# 9 - Hypotheses testing
 ################################################################################
 ################################################################################
 # 9.1 - cophenetic distances
@@ -740,17 +732,16 @@ beta_div_mean_100 <- lapply(beta_div, function(x) as.data.frame(x$SCBD) %>% muta
 SCBD_100 <- do.call(rbind, beta_div_mean_100) %>% mutate(status = "all_100%")
 
 #
-mean(SCBD_cand$mean_scbd) #  6.433863e-05
-mean(SCBD_cand_pres$mean_scbd) #  0.0001388903
-mean(SCBD_100$mean_scbd) # 0.004465559
-wilcox.test(SCBD_cand$mean_scbd, SCBD_cand_pres$mean_scbd) # p-value < 2.2e-16
-wilcox.test(SCBD_cand$mean_scbd, SCBD_100$mean_scbd) # p-value < 2.2e-16
+mean(SCBD_cand$mean_scbd) 
+mean(SCBD_cand_pres$mean_scbd)
+mean(SCBD_100$mean_scbd) 
+wilcox.test(SCBD_cand$mean_scbd, SCBD_cand_pres$mean_scbd) 
+wilcox.test(SCBD_cand$mean_scbd, SCBD_100$mean_scbd) 
 
 SCBD_pres <- rbind(SCBD_cand_pres, SCBD_cand)
 SCBD_pres <- rbind(SCBD_pres, SCBD_100)
 
 # Merge both Figures
-# Figure 3 - 1
 SCBD_pres %>%
   # mutate(day = fct_reorder(test, value)) %>%
   mutate(status = factor(status, levels=c("all_100%", "present_candidate", "lost_candidate"))) %>%
@@ -765,7 +756,6 @@ SCBD_pres %>%
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 
-# Figure 3 - 2
 SCBD_pres %>%
   # mutate(day = fct_reorder(test, value)) %>%
   mutate(status = factor(status, levels=c("all_100%", "present_candidate", "lost_candidate"))) %>%
@@ -804,17 +794,17 @@ specialist_100 <- lapply(abund_table, function(x) separate(x, uniq_label, into =
                            subset(status == "1") %>% mutate(group = as.numeric(group)) %>% group_by(status) %>% summarise(community_size = mean(community_size)))
 specialist_100 <- do.call(rbind, specialist_100) %>% mutate(status = "all_100%")
 
-mean(specialist_cand$community_size) # 39.85221
-mean(specialist_prescand$community_size) # 36.89027
-mean(specialist_100$community_size) # 45.79316
+mean(specialist_cand$community_size)
+mean(specialist_prescand$community_size)
+mean(specialist_100$community_size)
 
-wilcox.test(specialist_cand$community_size, specialist_prescand$community_size) # p-value < 2.2e-16
-wilcox.test(specialist_cand$community_size, specialist_100$community_size) # p-value < 2.2e-16
+wilcox.test(specialist_cand$community_size, specialist_prescand$community_size)
+wilcox.test(specialist_cand$community_size, specialist_100$community_size)
 
 specialist <- rbind(specialist_cand, specialist_prescand)
 specialist <- rbind(specialist, specialist_100)
 
-# Figure -> modify on illustrator
+# Figure -> modify in illustrator
 specialist %>%
   # mutate(day = fct_reorder(test, value)) %>%
   mutate(status = factor(status, levels=c("all_100%", "present_candidate", "lost_candidate"))) %>%
@@ -980,24 +970,6 @@ type_test <- pairwise.t.test.with.t.and.df(type_stat$value, type_stat$name_test,
 type_test$t.value
 type_test$p.value
 
-# > type_test$t.value
-#                  grass_100% grass_candidate herb_100% herb_candidate shrub_100% shrub_candidate
-# grass_candidate  62.431309              NA        NA             NA         NA              NA
-# herb_100%        -5.683214       -68.11452        NA             NA         NA              NA
-# herb_candidate   33.543792       -28.88752  39.22701             NA         NA              NA
-# shrub_100%      -71.200620      -133.63193 -65.51741     -104.74441         NA              NA
-# shrub_candidate -50.042148      -112.47346 -44.35893      -83.58594   21.15847              NA
-# tree_candidate  -79.760730      -142.19204 -74.07752     -113.30452   -8.56011       -29.71858      
-# 
-# > type_test$p.value
-#                    grass_100% grass_candidate     herb_100% herb_candidate   shrub_100% shrub_candidate
-# grass_candidate  0.000000e+00              NA            NA             NA           NA              NA
-# herb_100%        2.887632e-07    0.000000e+00            NA             NA           NA              NA
-# herb_candidate  1.490014e-227   4.004394e-172 4.605458e-303             NA           NA              NA
-# shrub_100%       0.000000e+00    0.000000e+00  0.000000e+00              0           NA              NA
-# shrub_candidate  0.000000e+00    0.000000e+00  0.000000e+00              0 4.824525e-95              NA
-# tree_candidate   0.000000e+00    0.000000e+00  0.000000e+00              0 2.880116e-16   1.486448e-181
-
 type_testpv <- as.data.frame(type_test$p.value) %>% mutate(param1 = row.names(.)) %>% 
   pivot_longer(cols =  'grass_100%':'shrub_candidate', names_to = "param2") %>% 
   separate(col = "param1", into = c("type1", "status1"), sep = "_", remove = F, extra = "drop") %>%
@@ -1005,23 +977,7 @@ type_testpv <- as.data.frame(type_test$p.value) %>% mutate(param1 = row.names(.)
   mutate(keep = ifelse(type1 == type2, "yes", "no")) %>% subset(keep == "no" & status1 == "candidate" & status2 == "candidate") %>% filter(!is.na(value)) %>% dplyr::select(-keep)
 type_testpv %>% dplyr::select(type1, status1, status2, value)
 
-# type1 status1   status2       value
-# <chr> <chr>     <chr>         <dbl>
-#   1 herb  candidate candidate 0        
-# 2 shrub candidate candidate 2.48e-202
-# 3 shrub candidate candidate 0        
-# 4 tree  candidate candidate 0        
-# 5 tree  candidate candidate 0        
-# 6 tree  candidate candidate 1.18e-174
-
 type_stat %>% subset(name == "candidate") %>% group_by(type) %>% summarise(mean = mean(value))
-
-# type   mean
-# <chr> <dbl>
-#   1 grass 0.650
-# 2 herb  0.545
-# 3 shrub 0.241
-# 4 tree  0.133
 
 # Plot
 order_type <- type_plot %>% subset(name == "candidate") %>% group_by(type) %>% mutate(mean = mean(value)) %>% dplyr::select(type, mean) %>% distinct() %>% arrange(desc(mean))
@@ -1120,28 +1076,8 @@ summary(model)
 #fam_test <- pairwise.t.test(fam_stat$prop_abs, fam_stat$name_test, p.adjust.method="bonferroni")
 fam_test <- pairwise.t.test.with.t.and.df(fam_stat$prop_abs, fam_stat$name_test, p.adjust.method="bonferroni")
 fam_test$p.value
-#                    Asparagaceae_cand Asteraceae_cand Betulaceae_cand Boraginaceae_cand Ericaceae_cand Papaveraceae_cand Polygonaceae_cand Rosaceae_cand Salicaceae_cand
-# Asteraceae_cand         5.033930e-31              NA              NA                NA             NA                NA                NA            NA              NA
-# Betulaceae_cand         0.000000e+00    0.000000e+00              NA                NA             NA                NA                NA            NA              NA
-# Boraginaceae_cand      4.948322e-191    0.000000e+00    0.000000e+00                NA             NA                NA                NA            NA              NA
-# Ericaceae_cand         1.240054e-233   1.820069e-100   2.621585e-250      0.000000e+00             NA                NA                NA            NA              NA
-# Papaveraceae_cand       2.935322e-24   8.822652e-108    0.000000e+00      2.829041e-83   0.000000e+00                NA                NA            NA              NA
-# Polygonaceae_cand       2.462116e-12    4.564622e-04    0.000000e+00     9.095144e-291  6.598618e-144      2.537354e-70                NA            NA              NA
-# Rosaceae_cand           6.855776e-35    1.000000e+00    0.000000e+00      0.000000e+00   5.471796e-94     1.123570e-114      1.222955e-05            NA              NA
-# Salicaceae_cand         0.000000e+00    0.000000e+00    7.742385e-28      0.000000e+00  3.844150e-118      0.000000e+00      0.000000e+00             0              NA
-# Saxifragaceae_cand      0.000000e+00    0.000000e+00    5.360688e-14      0.000000e+00  3.963172e-152      0.000000e+00      0.000000e+00             0      0.04459682
 
 fam_test$t.value
-#                     Asparagaceae_cand Asteraceae_cand Betulaceae_cand Boraginaceae_cand Ericaceae_cand Papaveraceae_cand Polygonaceae_cand Rosaceae_cand Salicaceae_cand
-# Asteraceae_cand           -11.947347              NA              NA                NA             NA                NA                NA            NA              NA
-# Betulaceae_cand           -68.557033     -56.6096864              NA                NA             NA                NA                NA            NA              NA
-# Boraginaceae_cand          30.272857      42.2202042       98.829891                NA             NA                NA                NA            NA              NA
-# Ericaceae_cand            -33.653107     -21.7057603       34.903926         -63.92596             NA                NA                NA            NA              NA
-# Papaveraceae_cand          10.556001      22.5033473       79.113034         -19.71686       44.20911                NA                NA            NA              NA
-# Polygonaceae_cand          -7.530994       4.4163531       61.026039         -37.80385       26.12211         -18.08699                NA            NA              NA
-# Rosaceae_cand             -12.676569      -0.7292224       55.880464         -42.94943       20.97654         -23.23257         -5.145576            NA              NA
-# Salicaceae_cand           -57.244591     -45.2972442       11.312442         -87.51745      -23.59148         -67.80059        -49.713597     -44.56802              NA
-# Saxifragaceae_cand        -60.538625     -48.5912785        8.018408         -90.81148      -26.88552         -71.09463        -53.007632     -47.86206       -3.294034
 
 as.data.frame(fam_test$p.value) %>% names()
 fam_testpv <- as.data.frame(fam_test$p.value) %>% mutate(param1 = row.names(.)) %>% 
@@ -1150,31 +1086,6 @@ fam_testpv <- as.data.frame(fam_test$p.value) %>% mutate(param1 = row.names(.)) 
   separate(col = "param2", into = c("family2", "status2"), sep = "_", remove = F, extra = "drop") %>%
   mutate(keep = ifelse(family1 == family2, "yes", "no")) %>% subset(keep == "no") %>% filter(!is.na(value)) %>% dplyr::select(-keep) %>% dplyr::select(family1, family2, value)
 fam_testpv %>% subset(value > 0) %>% as.data.frame()
-
-# family1      family2         value
-# 1     Asteraceae Asparagaceae  5.033930e-31
-# 2   Boraginaceae Asparagaceae 4.948322e-191
-# 3      Ericaceae Asparagaceae 1.240054e-233
-# 4      Ericaceae   Asteraceae 1.820069e-100
-# 5      Ericaceae   Betulaceae 2.621585e-250
-# 6   Papaveraceae Asparagaceae  2.935322e-24
-# 7   Papaveraceae   Asteraceae 8.822652e-108
-# 8   Papaveraceae Boraginaceae  2.829041e-83
-# 9   Polygonaceae Asparagaceae  2.462116e-12
-# 10  Polygonaceae   Asteraceae  4.564622e-04
-# 11  Polygonaceae Boraginaceae 9.095144e-291
-# 12  Polygonaceae    Ericaceae 6.598618e-144
-# 13  Polygonaceae Papaveraceae  2.537354e-70
-# 14      Rosaceae Asparagaceae  6.855776e-35
-# 15      Rosaceae   Asteraceae  1.000000e+00
-# 16      Rosaceae    Ericaceae  5.471796e-94
-# 17      Rosaceae Papaveraceae 1.123570e-114
-# 18      Rosaceae Polygonaceae  1.222955e-05
-# 19    Salicaceae   Betulaceae  7.742385e-28
-# 20    Salicaceae    Ericaceae 3.844150e-118
-# 21 Saxifragaceae   Betulaceae  5.360688e-14
-# 22 Saxifragaceae    Ericaceae 3.963172e-152
-# 23 Saxifragaceae   Salicaceae  4.459682e-02
 
 fam_sign <- fam_testpv %>% subset(value > 0.05)
 fam_sign_n <- fam_sign$family1
@@ -1198,19 +1109,6 @@ fam_work_plot1 %>%
   ylab("proportion of candidate absent from modern")
 fam_work_plot1 %>% group_by(family) %>% mutate(mean = mean(prop_abs)) %>% dplyr::select(family, mean) %>% distinct() %>% arrange(desc(mean))
 
-# family          mean
-# <chr>          <dbl>
-#   1 Boraginaceae  0.684 
-# 2 Papaveraceae  0.560 
-# 3 Asparagaceae  0.494 
-# 4 Polygonaceae  0.447 
-# 5 Asteraceae    0.419 
-# 6 Rosaceae      0.415 
-# 7 Ericaceae     0.283 
-# 8 Salicaceae    0.135 
-# 9 Saxifragaceae 0.115 
-# 10 Betulaceae    0.0643
-
 fam_work_plot1 %>%
   mutate(family = factor(family, levels=order_fam_1$family)) %>%
   ggplot(aes(y=prop_abs, x=family)) + 
@@ -1223,7 +1121,6 @@ fam_work_plot1 %>%
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 
-
 fam_work_plot2 %>%
   ggplot(aes(fill=family, y=prop_abs, x=family)) + 
   geom_violin(position="dodge", alpha=0.5, outlier.colour="transparent") +
@@ -1232,6 +1129,4 @@ fam_work_plot2 %>%
   ylab("proportion of candidate absent from modern")
 
 fam_work_plot2 %>% group_by(family) %>% mutate(mean = mean(prop_abs)) %>% dplyr::select(family, mean) %>% distinct() %>% arrange(desc(mean))
-
-
 
