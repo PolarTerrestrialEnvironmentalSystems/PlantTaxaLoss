@@ -597,7 +597,6 @@ tree1 <- groupOTU(tree$scenario.1, group_tree)
 #tree1 <- groupOTU(tree$scenario.3, group_tree)
 
 # usually, used tree$scenario.3. Maybe tree$scenario.1 is better -> length of branches are good and shows the family and genus level more accurately.
-# But what is best? I want to highlight that each tip is still a taxon.
 
 tree_tib <- as_tibble(tree1) %>% separate(col = "label", into = "genus", sep = "_", remove = F) 
 fam_info <- taxa_tree %>% dplyr::select(family, genus) %>% distinct()
